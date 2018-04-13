@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>层叠式轮播幻灯片特效</title>
+    <style>
+        *{text-decoration: none;font-family: "微软雅黑";}
+        img{width: 60%;}
+        #box{width: 500px;height: 441px;margin: auto;position: relative;text-align: center;}
+        #box img{position: absolute;box-shadow: 0 0 20px black;}
+        #box img:nth-child(3){z-index: -1;opacity: 1;}
+        #box img:nth-child(4){z-index: 0;opacity: 1;}
+        #box img:nth-child(5){z-index: 1;}
+        #box img:nth-child(6){z-index: 0;opacity: 1;}
+        #box img:nth-child(7){z-index: -1;opacity: 1;}
+        .btn{position: absolute;width: 50px;height: 100%;font-size: 30px;font-weight: bold;text-align: center;line-height: 500px;}
+        .prev{background-color: #26cb1c;left: -50px;}
+        .next{background-color: mediumslateblue;right: -50px;}
+    </style>
+</head>
+<body>
+<div id="box">
+    <a href="javascript:void(0);" class="btn prev">左</a>
+    <a href="javascript:void(0);" class="btn next">右</a>
+    <img style="left: 0px;" src="../img/p1.jpg"  alt="picture"/>
+    <img style="left: 50px;" src="../img/p2.jpg" alt="picture"/>
+    <img style="left: 100px;" src="../img/p3.jpg" alt="picture"/>
+    <img style="left: 150px;" src="../img/p4.jpg" alt="picture"/>
+    <img style="left: 200px;" src="../img/p5.jpg" alt="picture"/>
+</div>
+<script>
+    window.onload=function(){
+        //绑定事件
+        var box = document.getElementById("box");
+        var prev= box.getElementsByClassName("prev")[0];//绑定左按钮
+        var next= box.getElementsByClassName("next")[0];//绑定右按钮
+        var btn=box.getElementsByClassName("btn");
+        var imgs= box.getElementsByTagName("img");//绑定图片集合
+        var imglen=imgs.length;//获取图片集的长度
+        var imgshow=parseInt(imglen/2);//当前显示图片的序列号
+        var animated=false;//检测动画的状态 暂时不需要
+        var i= 1,left=true,right=true,time1;
+        //添加序列号
+        for(var i=0;i<imglen;i++){
+            imgs[i].setAttribute("index",i);
+        }
+        //动画效果函数 还未成熟
+//        function animate(offset,num){
+//            if(animated){
+//                return ;
+//            }
+//            var     time=300,//运行的时间
+//                    interval=10,//间隔
+//                    start=null,//启动器
+//                    speed=offset/(time/interval),
+//                    left=parseInt();
+//            function run(){
+//                animated=true;
+//                setTimeout(run,interval);//延时器
+//            }
+//            run();
+//
+//        }
+
+        //层叠替换效果运行
+        for(var j=0;j<btn.length;j++){//for循环得到按钮点击事件
+            btn[j].onclick=function(){
+                if(animated){
+                    return;
+                }
+                clearInterval(time1);//清除计时器
+                if(this.innerHTML=="右"){//右键点击
+                    newrun("右");
+                }else if(this.innerHTML=="左"){//左键点击
+                    newrun("左");
+                }
+                time1=setInterval(auto,1500);//再次自动运行轮播
+            }
+        }
+        //自动运行轮播
+        function auto(){
+            if(animated){
+                return;
+            }else{
+                newrun("右");
+            }
+        }
+        var time1=setInterval(auto,1500);
+        //运行轮播
+        function newrun(word){
+            for(var i=0;i<imglen;i++){
+                imgs[i].style.transition="all 0.5s";
+                animated=true;
+                setTimeout(function(){
+                    animated=false;
+                },300);//做一个延时调整数值 防止点击运行出现混乱
+                var currentindex=parseInt(imgs[i].getAttribute("index"));
+                if(word=="左"){
+                    imgs[i].style.left=parseInt(imgs[i].style.left)-50+"px";
+                    if(currentindex == 0){
+                        imgs[i].style.left="200px";
+                        imgs[i].setAttribute("index",4);
+                    }else{
+                        imgs[i].setAttribute("index",currentindex-1);
+                    }
+                }else if(word=="右"){
+                    imgs[i].style.left=parseInt(imgs[i].style.left)+50+"px";
+                    if(currentindex == 4){
+                        imgs[i].style.left="0px";
+                        imgs[i].setAttribute("index",0);
+                    }else{
+                        imgs[i].setAttribute("index",currentindex+1);
+                    }
+                }
+            // 层级提高
+                if(imgs[i].style.left=="100px"){
+                    imgs[i].style.zIndex=9;
+                    imgs[i].style.opacity=1;
+                }else if(imgs[i].style.left=="50px"||imgs[i].style.left=="150px"){
+                    imgs[i].style.zIndex=0;
+                    imgs[i].style.opacity=1;
+                }else if(imgs[i].style.left=="0px"||imgs[i].style.left=="200px"){
+                    imgs[i].style.zIndex=-1;
+                    imgs[i].style.opacity=1;
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

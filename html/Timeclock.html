@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>timeclock</title>
+    <style>
+        body{text-align: center;}
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width=400 height=400 style="border: solid 1px gray;"></canvas>
+<script>
+    window.onload = run;
+    function run(){
+        var myCanvas = document.getElementById("myCanvas");//绑定画布页面
+        var showCanvas = myCanvas.getContext("2d");//设定格式为‘2d';
+        showCanvas.save();//保存
+        showCanvas.translate(200,200);
+        var deg = 2*Math.PI/12;
+
+
+        showCanvas.save();
+        showCanvas.beginPath();
+        for (var i = 0; i < 13; i++) {
+            var x = Math.sin(i * deg);
+            var y = -Math.cos(i * deg);
+            showCanvas.lineTo(x * 150, y * 150);
+        }
+        var c = showCanvas.createRadialGradient(0, 0, 0, 0, 0, 130);
+        c.addColorStop(0, "#22f");
+        c.addColorStop(1, "#0ef")
+        showCanvas.fillStyle = c;
+        showCanvas.fill();
+        showCanvas.closePath();
+        showCanvas.restore();
+//////////////////////////////////////////数字
+        showCanvas.save();
+        showCanvas.beginPath();
+        for(var j=1;j<13;j++){
+            var x = Math.sin(j*deg);
+            var y = -Math.cos(j*deg);
+            showCanvas.textAlign = 'center';
+            showCanvas.textBaseline="middle";
+            showCanvas.fillStyle = 'deeppink';
+            showCanvas.fillText(j,x*130,y*130);
+        }
+        showCanvas.closePath();
+        showCanvas.restore();
+/////////////////////////////////////////////时针刻度
+        showCanvas.save();
+        showCanvas.beginPath();
+        showCanvas.fillStyle = 'red';
+        showCanvas.textAlign = 'center';
+        showCanvas.textBaseline="middle";
+        for(var i=1;i<=12;i++){
+            showCanvas.rotate(Math.PI/6);
+            showCanvas.fillRect(0,115,2,5);
+        }
+        showCanvas.closePath();
+        showCanvas.restore();
+
+        //获取当前的具体时间
+        var newdate = new Date();
+        var hours = (newdate.getHours()%12) * Math.PI/6;
+        var minutes = newdate.getMinutes() * Math.PI /30 ;
+        var seconds = newdate.getSeconds() * Math.PI /30 ;
+        console.log(newdate.getHours())
+//////////////////////////////////////////////时针
+        showCanvas.save();//时针
+        showCanvas.rotate(Math.PI);
+        showCanvas.rotate(hours + minutes/12 + seconds/720);
+        showCanvas.beginPath();
+        showCanvas.lineWidth = 5;
+        showCanvas.moveTo(0,0);
+        showCanvas.lineTo(0,70);
+        showCanvas.strokeStyle = 'black';
+        showCanvas.stroke();
+        showCanvas.closePath();
+        showCanvas.restore();
+//////////////////////////////////////////////分针
+        showCanvas.save();//分针
+        showCanvas.rotate(Math.PI);
+        showCanvas.rotate(minutes + seconds/60);
+        showCanvas.beginPath();
+        showCanvas.lineWidth = 3;
+        showCanvas.moveTo(0,0);
+        showCanvas.lineTo(0,90);
+        showCanvas.strokeStyle = 'black';
+        showCanvas.stroke();
+        showCanvas.closePath();
+        showCanvas.restore();
+//////////////////////////////////////////////秒针
+        showCanvas.save();//秒针
+        showCanvas.rotate(Math.PI);
+        showCanvas.rotate(seconds);
+        showCanvas.beginPath();
+        showCanvas.lineWidth = 1;
+        showCanvas.moveTo(0,0);
+        showCanvas.lineTo(0,110);
+        showCanvas.strokeStyle = 'black';
+        showCanvas.stroke();
+        showCanvas.closePath();
+        showCanvas.restore();
+/////////////////////////////////////////////画小圆点
+        showCanvas.save();
+        showCanvas.beginPath();
+        showCanvas.arc(0,0,5,0,2*Math.PI);
+        showCanvas.fillStyle = 'green';
+        showCanvas.strokeStyle = 'blue';
+        showCanvas.fill();
+        showCanvas.stroke();
+        showCanvas.closePath();
+        showCanvas.restore();
+        showCanvas.restore();////////////////////////////栈出
+
+        //开始执行
+        setTimeout(run,1000)
+    }
+</script>
+</body>
+</html>
