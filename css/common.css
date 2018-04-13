@@ -20,7 +20,7 @@ border-radius: 50%;overflow: hidden;}
 .list-sides ul li:nth-child(1){background-color: green;line-height: 40px;}
 .list-sides ul li:nth-child(2){background-color: red;line-height: 25px;}
 .list-sides ul li:hover{background-color:aqua; }
-
+.list-sides ul li a{display: block;}
 
 /*JS轮播*/
 .box-one .banner{width: 500px;height: 400px;display: inline-block;margin: 50px 40px;position: relative;overflow: hidden;}
