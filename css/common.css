@@ -1,0 +1,96 @@
+@charset "utf-8";
+*{margin:0;padding: 0;text-decoration: none;list-style: none;}
+body{font-size: 13px;margin:0;padding: 0;position: relative;top: 0;overflow: hidden;}
+img{width: 100%;height: 100%;}
+/*清除浮动*/
+.clearFix:after{content: "";display: block;clear: both;}
+/*公共通用*/
+.contanier{width: 100%;}
+.box{width: 100%;height: 500px;}
+.box-one{background-color: aqua;text-align: center;}
+.box-two{background-color:darkgoldenrod;text-align: center;}
+.box-three{background-color: darkgreen;text-align: center;}
+.box-four{background-color: darkmagenta;}
+
+/*JS轮播*/
+.box-one .banner{width: 500px;height: 400px;display: inline-block;margin: 50px 40px;position: relative;overflow: hidden;}
+.box-one .banner h1{font-size: 25px;line-height: 30px;margin-bottom: 20px;color: cadetblue;}
+.box-one .banner .main1-btn{display: none;position: absolute;top: 200px;font-size: 50px;width: 50px;height: 70px;background-color: rgba(0,0,0,0.3);color: white;line-height: 70px;}
+.box-one .banner .main-left{left: 0;}
+.box-one .banner .main-right{right: 0;}
+.box-one .banner:hover .main1-btn{display: block;}
+.box-one .banner .main1-btn:hover{background-color: rgba(0,0,0,1);}
+.box-one .banner-imgs{width: 9999px;}
+.box-one .banner-imgs img{float: left;width: 500px;}
+.box-one .banner ul{position: absolute;bottom: 20px;z-index: 9;text-align: center;width: 100%;}
+.box-one .banner ul li{width: 20px;height: 20px;background-color: white;display: inline-block;border-radius: 50%;
+    cursor: pointer;margin: 0 2px;}
+.box-one .banner ul .active{background-color: orangered;}
+.box-one .banner ul li:hover{background-color: orangered;}
+/*层叠式轮播1*/
+.carbanner{width: 500px;height: 440px;display: inline-block;position: relative;text-align: center;margin: 100px 60px;}
+.carbanner img{position: absolute;box-shadow: 0 0 20px black;height: auto;}
+.carbanner img:nth-child(3){z-index: 1;opacity: 1;width: 200px;height: 300px;top: 70px;}
+.carbanner img:nth-child(4){z-index: 2;opacity: 1;width: 240px;height: 360px;top: 40px;}
+.carbanner img:nth-child(5){z-index: 3;width: 300px;height: 440px;}
+.carbanner img:nth-child(6){z-index: 2;opacity: 1;width: 240px;height: 360px;top: 40px;}
+.carbanner img:nth-child(7){z-index: 1;opacity: 1;width: 200px;height: 300px;top: 70px;}
+.carbanner .btn{position: absolute;width: 50px;height: 100%;font-size: 30px;font-weight: bold;text-align: center;line-height: 500px;}
+.carbanner .prev{background-color: #26cb1c;left: -50px;}
+.carbanner .next{background-color: mediumslateblue;right: -50px;}
+/*层叠式轮播2*/
+.box-two .carbanner2{height: 400px;overflow: hidden;}
+.carbanner2 .img{position: absolute;top: 0;left: 0;width: 100%;height: 100%;font-size: 50px;line-height: 400px;text-align: center;color: white;}
+.carbanner2 .img img{width: 100%;height: 100%;left: 0px;}
+.carbanner2 .box1{background: deeppink;}
+.carbanner2 .box2{background: darkblue;}
+.carbanner2 .box3{background: darkmagenta;}
+.carbanner2 .pagesize{position: absolute;bottom: 20px;right: 20px;z-index: 99}
+.carbanner2 .pagesize li{float: left;width: 20px;height: 20px;text-align: center;line-height: 20px;font-size: 16px;
+    font-weight: bold;color: black;margin-left: 10px;cursor: pointer;}
+.carbanner2 .pagesize li:hover{color: white;}
+.carbanner2 .btn1{position: absolute;top: 150px;width: 40px;height: 80px;text-align: center;line-height: 80px;  font-size: 50px;
+    color: white;background: rgba(0,0,0,0.3);cursor: pointer;z-index: 100;display: none;}
+.carbanner2 div:nth-child(4){left: 0px;}
+.carbanner2 div:nth-child(5){right: 0px ;}
+.carbanner2:hover .btn1{display: block;}
+.carbanner2 .btn1:hover{background-color: rgba(0,0,0,1);}
+
+/*简单计算器*/
+.calculator{display: inline-block;margin: 50px 50px;}
+.calculator .cal_box{width: 300px;height: 300px;background-color: rgba(0,0,255,0.3);margin: auto;padding: 20px;}
+.cal_box #show{width: 260px;height: 30px;padding: 10px 20px;border: none;outline: none;text-align: right;font-size: 30px;background: white;color: black;}
+.cal_box input{border: none;width: 50px;height: 50px;font-size: 20px;color: white;margin: 5px;cursor: pointer;outline: none;background-color: #1aa554;}
+.cal_box input:hover{background-color:#0fb554; }
+
+/*地鼠*/
+.game{display: inline-block;margin: 50px 50px;}
+.game .container{width: 300px;height: 300px;border: 2px solid darkblue;}
+.game .container ul li{position: relative;float: left;width: 100px;height: 100px;background: darkblue;border-radius: 50%;overflow: hidden;cursor: pointer;}
+.game img{position: absolute;z-index: 0;top: 0px;left: 0px;display: none;}
+.game .btn{width: 300px;height: auto;margin: 0 auto;}
+.game .btn input{width: 70px;height: 25px;line-height: 25px;background: darkblue;color: white;border: none;cursor: pointer;}
+.game .btn select{width: 50px;height: 25px;background: darkblue;color: white;border: none;}
+
+/*放大镜*/
+.pic{width: 400px;height: 280px;position: relative;top: 50px;float: left;}
+.pic .pic_change{width: 400px;height: 280px;position: relative;}
+.pic .pic_change .hide{position: absolute;top: 0px;left: 0px;width: 400px;height: 280px;background-color: rgba(0,0,0,0.1);z-index: 1; }
+.pic .show{opacity: 0;position: absolute;top: 0px;left: 450px;width: 400px;height: 280px;z-index: -1; overflow: hidden;}
+.pic .show img{width: auto; height: auto;position: absolute;}
+.pic .pic_change span{opacity: 0;display: inline-block;position: absolute;top: 0px;left:0px;width: 100px;height: 70px;z-index: 2;cursor: pointer;background-color: rgba(0,0,0,0.3);}
+.pic:hover span{opacity: 1;}
+.pic:hover .show{opacity: 1;z-index: 99;}
+
+/*QQ列表*/
+
+.qqlist{ float: right;width: 300px; margin-top: 50px;margin-right:100px;border: solid 1px black;display: inline-block;}
+.qqlist ul{ display: none;  }
+.qqlist h2{background-color: aqua;text-indent: 20px;line-height: 30px;}
+.qqlist ul li{text-indent: 25px;border-bottom: solid 1px black;cursor: pointer;line-height: 25px;}
+.qqlist ul li:hover{background-color: darkcyan;}
+.qqlist .active{background-color: darkcyan;}
+.qqlist div:last-child ul li:last-child{border-bottom: none;}
+
+
+
